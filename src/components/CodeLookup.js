@@ -21,7 +21,7 @@ function CodeLookup() {
         setError('');
       } else {
         setCode('');
-        setError('해당 ID를 찾을 수 없습니다.');
+        setError('해당 학번을 찾을 수 없습니다.');
       }
     } catch (err) {
       setError('데이터를 불러오는 중 오류가 발생했습니다.');
@@ -31,21 +31,26 @@ function CodeLookup() {
 
   return (
     <div className="code-lookup">
-      <h2>코드 조회</h2>
       <form onSubmit={handleSubmit}>
-        <input
-          type="text"
-          value={id}
-          onChange={(e) => setId(e.target.value)}
-          placeholder="ID를 입력하세요"
-          required
-        />
-        <button type="submit">조회</button>
+        <div className="input-group">
+          <input
+            type="text"
+            value={id}
+            onChange={(e) => setId(e.target.value)}
+            placeholder="학번을 입력하세요"
+            required
+            maxLength="8"
+            pattern="[0-9]{8}"
+          />
+          <button type="submit">조회</button>
+        </div>
       </form>
       {code && (
         <div className="result">
-          <h3>조회 결과</h3>
-          <p>코드: {code}</p>
+          <div className="code-box">
+            <span className="code-label">수강 코드</span>
+            <span className="code-value">{code}</span>
+          </div>
         </div>
       )}
       {error && <p className="error">{error}</p>}
