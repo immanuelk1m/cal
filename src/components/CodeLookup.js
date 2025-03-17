@@ -54,6 +54,12 @@ function CodeLookup() {
         </div>
       )}
       {error && <p className="error">{error}</p>}
+      <div className="contact-info">
+        <p>문의사항 발생 시 TA에게 문의 메일 남겨주시기 바랍니다.</p>
+        <a href="mailto:22000093@handong.ac.kr" className="email-link">
+          22000093@handong.ac.kr
+        </a>
+      </div>
     </div>
   );
 }
