@@ -8,16 +8,14 @@ function CodeLookup() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch('/data/user.csv');
-      const text = await response.text();
-      const lines = text.split('\n');
-      const headers = lines[0].split('\t');
-      const data = lines.slice(1).map(line => {
-        const [id, code] = line.split('\t');
-        return { id, code };
-      });
+      const response = await fetch('/.netlify/functions/getCode');
+      const result = await response.json();
       
-      const user = data.find(user => user.id === id);
+      if (result.error) {
+        throw new Error(result.error);
+      }
+
+      const user = result.data.find(user => user.id === id);
       if (user) {
         setCode(user.code);
         setError('');
